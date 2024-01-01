@@ -1,0 +1,95 @@
+classDiagram
+    class User {
+        +String username
+        +String password
+        +String email
+        +String first_name
+        +String last_name
+	+create_user()
+	+set_password()
+    }
+    class Account {
+        +User user
+        +int phone_number
+        +String address
+        +String city
+        +String state
+        +String country
+        +int zip_code
+    }
+    class Doctor {
+        +Account account
+        +String hospital
+        +String specialization
+        +int license_number
+        +int rating
+    }
+    class Patient {
+        +Account account
+        +datetime date_of_birth
+        +String gender
+        +String blood_group
+        +int height
+        +int weight
+        +String emergency_contact
+    }
+    class Hospital {
+        +String name
+        +String address
+        +String city
+        +String state
+        +String country
+        +int zip_code
+        +int phone_number
+    }
+    class MedicalHistory {
+        +int patient_id
+        +date
+        +String medical_condition
+        +String medications
+        +String disease
+    }
+    class LabResult {
+        +UUID uid
+        +int patient_id
+        +date
+        +String test_name
+        +String result
+        +int reference_range
+    }
+    class Treatment {
+        +UUID uid
+        +int patient_id
+        +int doctor_id
+        +String name
+        +String description
+        +datetime date_started
+        +datetime date_ended
+        +Bool is_started
+        +Bool is_completed
+        +datetime added
+        +timestamp
+    }
+    class Examination {
+        +UUID uid
+        +int patient_id
+        +int examiner_id
+        +String history_of_present_illness
+        +String physical_examination
+        +String assessment_and_plan
+        +String orders_and_prescriptions
+        +String progress_note
+        +String findings
+        +String disease
+    }
+    User <|-- Account
+    Account <|-- Doctor
+    Account <|-- Patient
+    Doctor "1" --> "0..*" Patient : treats
+    Doctor "1" --> "1" Hospital : works at
+    Patient "1" --> "0..*" MedicalHistory : has
+    Patient "1" --> "0..*" LabResult : has
+    Patient "1" --> "0..*" Treatment : receives
+    Patient "1" --> "0..*" Examination : undergoes
+    Doctor "1" --> "0..*" Treatment : prescribes
+    Doctor "1" --> "0..*" Examination : performs

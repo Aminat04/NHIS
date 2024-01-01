@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Appointments | NHIS App</title>
+{% endblock head %}
+
+{% block body %}
+<div class="ui container">
+    <h1 class="ui header">Appointments</h1>
+    <br>
+    <a href="{% url 'core:create_appointment' %}" class="ui primary button">
+      Create new appointment
+    </a>
+    <br>
+
+    <table class="ui celled striped table">
+      <thead>
+        <tr>
+          <th colspan="3">
+            Appointments
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for appointment in appointments %}
+        <tr>
+          <td class="collapsing">
+            <i class="calendar icon"></i> <a href="{% url 'core:appointment' appointment.uid %}">{{appointment.title}}</a>
+          </td>
+         
+          <td class="right aligned collapsing">{{appointment.scheduled_time}}</td>
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+
+  </div>
+{% endblock body %}

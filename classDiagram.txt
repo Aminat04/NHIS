@@ -1,0 +1,179 @@
+classDiagram
+  class User {
+    +id: Integer
+    +username: String
+    +password: String
+    +email: String
+    +set_password()
+    +save()
+  }
+
+  class Account {
+    +user: User
+    +email: String
+    +role: String
+    +date_created: DateTime
+    +date_updated: DateTime
+    +.
+  }
+
+  class Hospital {
+    +uid: UUID
+    +name: String
+    +admin: Account
+    +staff: List<Account>
+    +address: String
+    +city: String
+    +state: String
+    +zip_code: String
+    +patients(): List<Patient>
+    +doctors(): List<Doctor>
+  }
+
+  class Doctor {
+    +uid: UUID
+    +account: Account
+    +first_name: String
+    +last_name: String
+    +qualification: String
+    +specialization: String
+    +hospital: Hospital
+    +appointments()
+  }
+
+  class Patient {
+    +uid: UUID
+    +account: Account
+    +first_name: String
+    +last_name: String
+    +date_of_birth: Date
+    +gender: String
+    +address: String
+    +nationality: Country
+    +patient_number: String
+    +nhis_number: String
+    +file_number: String
+    +mobile_number: String
+    +house_number: String
+    +emergency_contact_email: String
+    +emergency_contact_mobile: String
+    +height: Float
+    +weight: Float
+    +blood_group: String
+    +genotype: String
+    +hospital: Hospital
+    +date_of_open_file: Date
+    +barcode: Barcode
+    +age(): Integer
+    +save(): void
+    +appointments()
+  }
+
+  class MedicalHistory {
+    +patient: Patient
+    +date: Date
+    +medical_condition: String
+    +medications: String
+    +disease: String
+  }
+
+  class LabResult {
+    +uid: UUID
+    +patient: Patient
+    +date: Date
+    +test_name: String
+    +result: String
+    +reference_range: String
+  }
+
+  class Treatment {
+    +uid: UUID
+    +patient: Patient
+    +doctor: Doctor
+    +name: String
+    +description: String
+    +date_started: Date
+    +date_ended: Date
+    +is_started: Boolean
+    +is_completed: Boolean
+    +added: DateTime
+    +timestamp: DateTime
+  }
+
+  class Examination {
+    +uid: UUID
+    +patient: Patient
+    +examiner: Doctor
+    +history_of_present_illness: String
+    +physical_examination: String
+    +assessment_and_plan: String
+    +orders_and_prescriptions: String
+    +progress_note: String
+    +findings: String
+    +disease: String
+  }
+
+  class Appointment {
+    +uid: UUID
+    +patient: Patient
+    +doctor: Doctor
+    +date: DateTime
+    +reason: String
+    +is_confirmed: Boolean
+    +is_completed: Boolean
+    +timestamp: DateTime
+  }
+
+  class AuditTrail {
+    +uid: UUID
+    +account: Account
+    +action: String
+    +timestamp: DateTime
+  }
+
+  User --|> Account
+  Account --|> Hospital
+  Account --|> Doctor
+  Account --|> Patient
+  Doctor --|> Hospital
+  Patient --|> Hospital
+  MedicalHistory --|> Patient
+  LabResult --|> Patient
+  Treatment --|> Patient
+  Treatment --|> Doctor
+  Examination --|> Patient
+  Examination --|> Doctor
+  Appointment --|> Patient
+  Appointment --|> Doctor
+  AuditTrail --|> Account
+
+
+######### Conceptual
+
+graph TD
+  subgraph NHIS Data System
+    Patient -->|One-to-Many| MedicalHistory
+    Patient -->|One-to-Many| LabResult
+    Patient -->|One-to-Many| Treatment
+    Doctor -->|Many-to-One| Treatment
+    Patient -->|One-to-Many| Examination
+    Doctor -->|Many-to-One| Examination
+    Patient -->|One-to-Many| Appointment
+    Doctor -->|Many-to-One| Appointment
+    Account -->|One-to-Many| AuditTrail
+    Hospital -->|One-to-Many| Patient
+    Hospital -->|One-to-Many| Doctor
+  end
+
+  subgraph Entities
+    MedicalHistory
+    LabResult
+    Treatment
+    Examination
+    Appointment
+    AuditTrail
+    Account
+    Hospital
+    Doctor
+    Patient
+  end

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>{{patient.fullname}} | Patient | NHIS App</title>
+{% endblock head %}
+
+{% block body %}
+<div class="ui container">
+    <h1 class="ui header">{{patient.fullname}}</h1>
+    <div class="ui clearing divider"></div>
+    <br>
+    <div class="ui two column grid">
+      <div class="column">
+        <div class="ui fluid card">
+          <div class="content">
+            <div class="header">Personal Information</div>
+            <div class="meta">Patient ID: {{ patient.uid }}</div>
+            <div class="description">
+              <p><strong>Name:</strong> {{ patient.first_name }} {{ patient.last_name }}</p>
+              <p><strong>Date of Birth:</strong> {{ patient.date_of_birth }}</p>
+              <p><strong>Gender:</strong> {{ patient.gender }}</p>
+              <p><strong>Address:</strong> {{ patient.address }}</p>
+              <!-- Add more details as needed -->
+            </div>
+          </div>
+          <div class="content">
+            <div class="header"></div>
+            <div class="description">
+                <p><strong>NHIS Number:</strong> {{ patient.nhis_number }}</p>
+              <p><strong>File Number:</strong> {{ patient.file_number }}</p>
+                <img style="width: 200px;" src="{{patient.barcode.url}}">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui fluid card">
+          <div class="content">
+            <div class="header">Medical Information</div>
+            <div class="description">
+              <p><strong>Height:</strong> {{ patient.height }} cm</p>
+              <p><strong>Weight:</strong> {{ patient.weight }} kg</p>
+              <p><strong>Blood Group:</strong> {{ patient.blood_group }}</p>
+              <p><strong>Genotype:</strong> {{ patient.genotype }}</p>
+              <!-- Add more details as needed -->
+            </div>
+          </div>
+          <div class="content">
+            <div class="header">Contact Information</div>
+            <div class="description">
+              <p><strong>Email:</strong> {{ patient.emergency_contact_email }}</p>
+              <p><strong>Mobile Number:</strong> {{ patient.mobile_number }}</p>
+              <!-- Add more details as needed -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  </div>
+{% endblock body %}

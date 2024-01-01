@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>{{hospital.name}} | Hospital | NHIS App</title>
+{% endblock head %}
+
+{% block body %}
+<div class="ui container">
+
+    <div class="ui card">
+        <div class="content">
+            <div class="header">{{hospital.name}}</div>
+        </div>
+        <div class="content">
+            <h4 class="ui sub header">Address</h4>
+            <div class="ui small feed">
+                <div class="event">
+                    <div class="content">
+                        <div class="summary">
+                            {{hospital.address}}
+                        </div>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="content">
+                        <div class="summary">
+                            {{hospital.zip_code}}
+                        </div>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="content">
+                        <div class="summary">
+                            {{hospital.city}}, {{hospital.state}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="extra content">
+            <button class="ui button">Edit Details</button>
+        </div>
+    </div>
+
+</div>
+
+{% endblock body %}

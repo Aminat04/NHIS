@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Dashboard | NHIS App</title>
+{% endblock head %}
+
+{% block body %}
+
+<div class="ui container">
+  <h1 class="ui header">Dashboard</h1>
+
+  <div class="ui equal width grid">
+
+    <div class="equal width row">
+      <div class="column">
+        <div class="ui raised segment">
+          <div>
+            <center>
+              <div class="ui statistic">
+                <div class="value">
+                  {{treatments.count}}
+                </div>
+                <div class="label">
+                  Treatments
+                </div>
+              </div>
+            </center>
+          </div>
+          <h4 class="ui horizontal divider header">
+            Recent
+          </h4>
+          <div class="ui relaxed list">
+            {% for treatment in treatments %}
+            <div class="item">
+              <div class="content">
+                <a class="header" href="{% url 'core:treatment' treatment.uid %}">{{treatment.name}}</a>
+                <div class="description">{{treatment.description}}</div>
+              </div>
+            </div>
+            {% endfor %}
+            
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui raised segment">
+          <div>
+            <center>
+              <div class="ui statistic">
+                <div class="value">
+                  {{appointments.count}}
+                </div>
+                <div class="label">
+                  Appointments
+                </div>
+              </div>
+            </center>
+          </div>
+          <h4 class="ui horizontal divider header">
+            Recent
+          </h4>
+          <div class="ui list">
+            {% for appointment in appointments %}
+            <div class="item">
+              <a class="header">{{appointment.title}}</a>
+              <div class="description">
+               {{appointment.description}}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui equal width grid">
+
+    <div class="equal width row">
+      <div class="column">
+        <div class="ui raised segment">
+          <h3 class="ui header">Medical History</h3>
+          <div class="ui relaxed list">
+            {% for item in medical_history %}
+            <div class="item">
+
+              <div class="content">
+                <a class="header" href="{% url 'core:view_medical_history' item.id %}">{{item.get_disease_display}}</a>
+                <div class="description">{{item.medical_condition}}</div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui raised segment">
+          <h3 class="ui header">Examinations</h3>
+          <div class="ui relaxed list">
+            {% for examination in examinations %}
+            <div class="item">
+              <img class="ui avatar image" src="https://ui-avatars.com/api/?name={{examination.patient.fullname}}&rounded=true">
+              <div class="content">
+                <a class="header" href="{% url 'core:view_examination' examination.uid %}">{{examination.patient.fullname}}</a>
+                <div class="description">{{examination.name}}</div>
+              </div>
+            </div>
+            {% endfor %}
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock body %}

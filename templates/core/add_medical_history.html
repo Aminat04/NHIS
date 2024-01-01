@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Add Medication History | NHIS App</title>
+{% endblock head %}
+
+{% block body %}
+<div class="ui container">
+    <form class="ui form" action="{% url 'core:add_medical_history' %}" method="POST">
+        {% csrf_token %}
+        <h3 class="ui dividing header">Add Medication History</h3>
+        <div class="field">
+            <label>Medical Condition</label>
+            <input type="text" name="medical_condition" placeholder="Medical Condition">
+        </div>
+        <div class="field">
+            <label>Disease</label>
+            <select class="ui fluid search dropdown" name="disease">
+                <option value="">Select</option>
+                {% for k, v in diseases %}
+                <option value="{{k}}">{{v}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="field">
+            <label>Medications</label>
+            <textarea name="medications"></textarea>
+        </div>
+
+        <div class="field">
+            <label>Date</label>
+            <input type="date" name="date">
+        </div>
+
+        <button type="submit" class="ui primary button">
+            Add
+        </button>
+
+    </form>
+</div>
+{% endblock body %}

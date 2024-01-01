@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>My Examinations | NHIS App</title>
+{% endblock head %}
+
+{% block body %}
+<div class="ui container">
+    <h1 class="ui header">My Examinations</h1>
+    <br>
+    {% if account.role == "patient" %}
+
+    {% else %}
+    <a href="{% url 'core:add_examination' %}" class="ui primary button">
+      Add Examination
+    </a>
+    {% endif %}
+    <br>
+
+    <table class="ui large table">
+      <thead>
+        <tr>
+          <th>Disease</th>
+          <th>Examiner</th>
+          <th>Findings</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for examination in examinations %}
+        <tr>
+          <td><a href="{% url 'core:view_examination' examination.uid %}">{{examination.get_disease_display}}</a></td>
+          <td>{{examination.examiner}}</td>
+          <td>{{examination.findings}}</td>
+        </tr>
+        {% endfor %}
+     
+      </tbody>
+     
+    </table>
+
+  </div>
+{% endblock body %}

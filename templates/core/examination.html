@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>{{examination.patient.fullname}} | Examination | NHIS App</title>
+{% endblock head %}
+
+{% block body %}
+<div class="ui padded segment">
+    <h1 class="ui header">{{examination.patient.fullname}} - Examination</h1>
+    <br>
+
+    <div class="ui clearing divider"></div>
+
+    <div class="ui right aligned grid">
+      <div class="left floated left aligned six wide column">
+        <div class="ui segment">
+          <h4 class="ui header">Examiner</h4>
+
+          <img class="ui avatar image" src="https://ui-avatars.com/api/?name={{examination.examiner.fullname}}&rounded=true">
+          <span>{{examination.examiner}}</span>
+        </div>
+      </div>
+      <div class="right floated left aligned six wide column">
+        <div class="ui segment">
+          <h4 class="ui header">Patient</h4>
+
+          <img class="ui avatar image" src="https://ui-avatars.com/api/?name={{examination.patient.fullname}}&rounded=true">
+          <span>{{examination.patient}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui clearing divider"></div>
+
+    <div class="ui text segment">
+        <h4 class="ui header">History of Present Illness</h4>
+        {{examination.history_of_present_illness}}
+    </div>
+
+    <div class="ui clearing divider"></div>
+
+    <div class="ui text segment">
+        <h4 class="ui header">Physical Examination</h4>
+        {{examination.physical_examination}}
+    </div>
+
+    <div class="ui clearing divider"></div>
+
+    <div class="ui text segment">
+        <h4 class="ui header">Assessment and Plan</h4>
+        {{examination.assessment_and_plan}}
+    </div>
+
+    <div class="ui clearing divider"></div>
+
+    <div class="ui text segment">
+        <h4 class="ui header">Orders and Prescriptions</h4>
+        {{examination.orders_and_prescriptions}}
+    </div>
+
+    <div class="ui clearing divider"></div>
+
+    <div class="ui text segment">
+        <h4 class="ui header">Progress Note</h4>
+        {{examination.progress_note}}
+    </div>
+
+    <div class="ui clearing divider"></div>
+
+    <div class="ui text segment">
+        <h4 class="ui header">Findings</h4>
+        {{examination.findings}}
+    </div>
+
+  </div>
+{% endblock body %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>{{medical_history.name}} | Medical History | NHIS App</title>
+{% endblock head %}
+
+{% block body %}
+<div class="ui padded segment">
+    <h1 class="ui header">{{medical_history.medical_condition}}</h1>
+    <div class="meta"><i class="clock icon"></i> {{medical_history.date}} </div>
+
+    <div class="ui clearing divider"></div>
+
+    <div class="ui right aligned grid">
+      <div class="left floated left aligned six wide column">
+        <div class="ui segment">
+          <h4 class="ui header">Patient</h4>
+
+          <img class="ui avatar image" src="https://ui-avatars.com/api/?name={{medical_history.patient.fullname}}&rounded=true">
+          <span>{{medical_history.patient}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui clearing divider"></div>
+
+    <div class="ui text segment">
+        <a class="ui grey label">{{medical_history.disease}}</a>
+    </div>
+
+    <div class="ui clearing divider"></div>
+
+
+    <div class="ui text segment">
+        {{medical_history.medications}}
+    </div>
+
+  </div>
+{% endblock body %}

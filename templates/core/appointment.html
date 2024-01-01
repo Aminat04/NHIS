@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>{{appointment.title}} | Appointment | NHIS App</title>
+{% endblock head %}
+
+{% block body %}
+<div class="ui padded segment">
+    <h1 class="ui header">{{appointment.title}}</h1>
+    <div class="meta"><i class="clock icon"></i> {{appointment.scheduled_time}} </div>
+
+    <div class="ui clearing divider"></div>
+
+    <div class="ui text segment">
+        {{appointment.description}}
+    </div>
+
+    <div class="ui segment">
+        <h4 class="ui header">Doctor</h4>
+        <img class="ui avatar image" src="https://ui-avatars.com/api/?name={{appointment.doctor.fullname}}&rounded=true">
+        <span>{{appointment.patient}}</span>
+      </div>
+
+  </div>
+{% endblock body %}

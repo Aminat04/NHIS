@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Signin | NHIS App</title>
+{% endblock head %}
+
+{% block body %}
+
+<div class="ui text container">
+
+
+<br><br>
+    <center>
+      <h1 class="ui header">NHIS Signin</h1>
+      <br>
+      <a class="ui primary basic button" href="{% url 'account:signup' %}">Go to Signup</a>
+
+    </center>
+    <br><br>
+  
+    <div class="ui three column grid">
+      <div class="column">
+        <div class="ui fluid card">
+          <div class="content">
+            <a class="header" href="{% url 'account:patient_signin' %}">Patient Signin</a>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui fluid card">
+          <div class="content">
+            <a class="header" href="{% url 'account:doctor_signin' %}">Doctor Signin</a>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui fluid card">
+          <div class="content">
+            <a class="header" href="{% url 'account:admin_signin' %}">Admin Signin</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
+{% endblock body %}

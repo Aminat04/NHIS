@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Add Treatment | NHIS App</title>
+{% endblock head %}
+
+{% block body %}
+<div class="ui container">
+    <form class="ui form" action="{% url 'core:add_treatment' %}" method="POST">
+        {% csrf_token %}
+        <h3 class="ui dividing header">Add New Treatment</h3>
+        <div class="field">
+            <label>Treatment Name</label>
+            <input type="text" name="name" placeholder="Treatment Name">
+        </div>
+        <div class="field">
+            <label>Description</label>
+            <textarea name="description"></textarea>
+        </div>
+
+        {% if account.role == "patient" %}
+        <div class="field">
+            <label>Doctor</label>
+            <div class="ui search2">
+                <div class="ui icon input">
+                    <input class="prompt" name="doctor_id" type="text" placeholder="Search doctors...">
+                    <i class="search icon"></i>
+                </div>
+                <div class="results"></div>
+            </div>
+        </div>
+        {% else %}
+        <div class="field">
+            <label>Patient</label>
+            <div class="ui search">
+                <div class="ui icon input">
+                    <input class="prompt" name="patient_id" type="text" placeholder="Search patients...">
+                    <i class="search icon"></i>
+                </div>
+                <div class="results"></div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="two fields">
+            <div class="field">
+                <label>Date Started</label>
+                <input type="date" name="date_started">
+            </div>
+            <div class="field">
+                <label>Date Ended</label>
+                <input type="date" name="date_ended">
+            </div>
+        </div>
+
+        <div class="inline field">
+            <div class="ui checkbox">
+                <input type="checkbox" name="is_started" tabindex="0" class="hidden">
+                <label>Has this treatment started?</label>
+            </div>
+        </div>
+        <div class="inline field">
+            <div class="ui checkbox">
+                <input type="checkbox" name="is_completed" tabindex="0" class="hidden">
+                <label>Has treatment been completed?</label>
+            </div>
+        </div>
+
+        <button type="submit" class="ui primary button">
+            Create
+        </button>
+
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+
+<script>
+    var content1 = {{patients | safe}};
+    var content2 = {{doctors | safe}};
+
+    $('.ui.search')
+        .search({
+            source: content1
+        })
+        ;
+
+        $('.ui.search2')
+        .search({
+            source: content2
+        })
+        ;
+
+    
+
+</script>
+{% endblock body %}

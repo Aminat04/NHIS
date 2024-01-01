@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Lab Results List | NHIS App</title>
+{% endblock head %}
+
+{% block body %}
+<div class="ui container">
+    <h1 class="ui header">Lab Results List</h1>
+    <br>
+    <a href="{% url 'core:add_lab_result' %}" class="ui primary button">
+      Add Result
+    </a>
+    <br>
+
+    <table class="ui celled striped table">
+      <thead>
+        <tr>
+          <th colspan="3">
+            Results
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for result in lab_results %}
+        <tr>
+          <td class="collapsing">
+            <i class="file outline icon"></i> <a href="{% url 'core:lab_result' result.uid %}">{{result.test_name}}</a>
+          </td>
+         
+          <td class="right aligned collapsing">{{result.date}}</td>
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+
+  </div>
+{% endblock body %}

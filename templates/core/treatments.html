@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>All Treatment | NHIS App</title>
+{% endblock head %}
+
+{% block body %}
+<div class="ui container">
+    <h2 class="ui header">Treatments</h2>
+    <div class="ui divider"></div>
+    <a href="{% url 'core:add_treatment' %}" class="ui primary button">
+      Add Treatment
+    </a>
+    <br>
+    <br>
+
+    <div class="ui cards">
+    {% for treatment in treatments %}
+      <div class="card">
+        <div class="content">
+          <a href="{% url 'core:treatment' treatment.uid %}" class="header">{{treatment.name}}</a>
+          <div class="meta"><i class="clock icon"></i> {{treatment.date_started}} </div>
+          <div class="description">
+            {{treatment.description}}
+          </div>
+          <div style="margin-top: 5px;">
+            {% if treatment.is_started %}
+            <a class="ui small orange label">Ongoing</a>
+            {% elif treatment.is_completed %}
+            <a class="ui small teal label">Completed</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+{% endblock body %}

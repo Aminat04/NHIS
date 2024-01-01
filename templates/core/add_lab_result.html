@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Add Lab Result | NHIS App</title>
+{% endblock head %}
+
+{% block body %}
+<div class="ui container">
+    <form class="ui form" action="{% url 'core:add_lab_result' %}" method="POST">
+        {% csrf_token %}
+        <h3 class="ui dividing header">Add Lab Result</h3>
+        <div class="field">
+            <label>Test Name</label>
+            <input type="text" name="test_name" placeholder="Test Name">
+        </div>
+
+        <div class="field">
+            <label>Patient</label>
+            <div class="ui search">
+                <div class="ui icon input">
+                    <input class="prompt" name="patient_id" type="text" placeholder="Search patients...">
+                    <i class="search icon"></i>
+                </div>
+                <div class="results"></div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label>Result</label>
+            <textarea name="result"></textarea>
+        </div>
+
+        <div class="field">
+            <label>Date</label>
+            <input type="date" name="date">
+        </div>
+
+        <button type="submit" class="ui primary button">
+            Add
+        </button>
+
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+
+<script>
+    var content = {{patients | safe}};
+
+    $('.ui.search')
+        .search({
+            source: content
+        })
+        ;
+
+    
+
+</script>
+{% endblock body %}

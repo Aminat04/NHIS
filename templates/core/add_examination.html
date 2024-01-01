@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Add Examination | NHIS App</title>
+{% endblock head %}
+
+{% block body %}
+<div class="ui container">
+    <form class="ui form" action="{% url 'core:add_examination' %}" method="POST">
+        {% csrf_token %}
+        <h3 class="ui dividing header">Add Examination</h3>
+     
+        <div class="field">
+            <label>Patient</label>
+            <div class="ui search">
+                <div class="ui icon input">
+                    <input class="prompt" name="patient_id" type="text" placeholder="Search patients...">
+                    <i class="search icon"></i>
+                </div>
+                <div class="results"></div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label>Disease</label>
+            <select class="ui fluid search dropdown" name="disease">
+                <option value="">Select</option>
+                {% for k, v in diseases %}
+                <option value="{{k}}">{{v}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="field">
+            <label>History of Present Illness</label>
+            <textarea name="history_of_present_illness"></textarea>
+        </div>
+
+        <div class="field">
+            <label>Physical Examination</label>
+            <textarea name="physical_examination"></textarea>
+        </div>
+
+        <div class="field">
+            <label>Assessment and Plan</label>
+            <textarea name="assessment_and_plan"></textarea>
+        </div>
+
+        <div class="field">
+            <label>Orders and Prescriptions</label>
+            <textarea name="orders_and_prescriptions"></textarea>
+        </div>
+
+        <div class="field">
+            <label>Progress Note</label>
+            <textarea name="progress_note"></textarea>
+        </div>
+
+        <div class="field">
+            <label>Findings</label>
+            <textarea name="findings"></textarea>
+        </div>
+
+        <button type="submit" class="ui primary button">
+            Add
+        </button>
+
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+
+<script>
+    var content = {{patients | safe}};
+
+    $('.ui.search')
+        .search({
+            source: content
+        })
+        ;
+
+    
+    console.log(content);
+
+</script>
+{% endblock body %}

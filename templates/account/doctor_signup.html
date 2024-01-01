@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Doctor Signup Form | NHIS App</title>
+{% endblock head %}
+
+{% block body %}
+
+<div class="ui basic segment container">
+
+
+<form class="ui form" action="{% url 'account:doctor_signup' %}" method="POST">
+    {% csrf_token %}
+    <h2 class="ui dividing header">Doctor Signup Form</h2>
+    <div class="field">
+        <label>Name</label>
+        <div class="two fields">
+            <div class="field">
+                <input type="text" name="first_name" placeholder="First Name">
+            </div>
+            <div class="field">
+                <input type="text" name="last_name" placeholder="Last Name">
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <label>E-mail</label>
+        <input type="email" name="email" placeholder="joe@schmoe.com">
+    </div>
+
+    <div class="field">
+        <label>Qualification</label>
+        <div class="ui fluid search selection dropdown">
+            <input type="hidden" name="qualification">
+            <i class="dropdown icon"></i>
+            <div class="default text">Select Qualification</div>
+            <div class="menu">
+                {% for k, v in qualifications %}
+                <div class="item" data-value="{{k}}">{{v}}</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="field">
+        <label>Specialization</label>
+        <input type="text" name="specialization" placeholder="Specialization">
+    </div>
+
+    <div class="field">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="********">
+    </div>
+    <button type="submit" class="ui primary button" tabindex="0">Submit</button>
+</form>
+
+</div>
+{% endblock body %}

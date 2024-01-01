@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>All Medical History | NHIS App</title>
+{% endblock head %}
+
+{% block body %}
+<div class="ui container">
+    <h1 class="ui header">Medical History</h1>
+    <br>
+    <a href="{% url 'core:add_medical_history' %}" class="ui primary button">
+      Add Medical History
+    </a>
+    <br>
+
+    <table class="ui large table">
+      <thead>
+        <tr>
+          <th>Medical Condition</th>
+          <th>Disease</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in all_medical_history %}
+        <tr>
+          <td><a href="{% url 'core:view_medical_history' item.id %}">{{item.medical_condition}}</a></td>
+          <td>{{item.get_disease_display}}</td>
+          <td>{{item.date}}</td>
+        </tr>
+        {% endfor %}
+     
+      </tbody>
+     
+    </table>
+
+  </div>
+{% endblock body %}

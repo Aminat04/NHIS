@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Admin Signin | NHIS App</title>
+{% endblock head %}
+
+{% block body %}
+
+<div class="ui basic segment text container">
+
+
+<form class="ui form" action="{% url 'account:admin_signin' %}" method="POST">
+    {% csrf_token %}
+    <h2 class="ui dividing header">Admin Signin</h2>
+    <div class="field">
+        <label>E-mail</label>
+        <input type="email" name="email" placeholder="joe@schmoe.com">
+    </div>
+    <div class="field">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="********">
+    </div>
+    <button type="submit" class="ui primary button" tabindex="0">Submit</button>
+</form>
+</div>
+{% endblock body %}
